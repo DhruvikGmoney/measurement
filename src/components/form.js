@@ -29,7 +29,7 @@ export default function FormData() {
             let config = {
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: 'http://127.0.0.1:8000/measurements/',
+                url: 'https://measurement.onrender.com/measurements/',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -63,7 +63,7 @@ export default function FormData() {
             let config = await {
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: 'http://127.0.0.1:8000/add_measurements/',
+                url: 'https://measurement.onrender.com/add_measurements/',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -116,7 +116,7 @@ export default function FormData() {
                 <h3 className='message'>{message && <span>{message.msg}</span>}</h3>
                 <Container>
                     <div className="Measurement">
-                    <h2 className='title'>Measurement</h2>
+                        <h2 className='title'>Measurement</h2>
                         <Row className='justify-content-center m-auto'>
                             <Col lg={7}>
                                 <Form.Group className="mb-3"    >
@@ -136,19 +136,20 @@ export default function FormData() {
                                     <Form.Control required onChange={(e) => setAge(e.target.value)} type="number" placeholder="enter age" />
                                 </Form.Group>
                             </Col>
-                            {isselected && <Col lg={7}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>waist</Form.Label>
-                                    <Form.Control disabled={!isother} onChange={(e) => setWaist(e.target.value)} value={waist} type="text" placeholder="enter waist" />
-                                </Form.Group>
-                            </Col>}
-                            <Col lg={7}>
+                            <Col lg={7} className="mb-3">
+                                <Form.Label>waist</Form.Label>
                                 {isselected && <Form.Select onChange={(e) => selectwaist(e.target.value)}>
                                     {optionList?.map((option, index) => (
                                         <option key={index} value={option}>{option}</option>
                                     ))}
                                 </Form.Select>}
                             </Col>
+                            {isselected && <Col  lg={7}>
+                                <Form.Group className="mb-3">
+                                    <Form.Control disabled={!isother} onChange={(e) => setWaist(e.target.value)} value={waist} type="text" placeholder="enter waist" />
+                                </Form.Group>
+                            </Col>}
+
                         </Row>
 
                         <Button type="submit" disabled={!isValid} onClick={!isselected ? Selectwaist : addwaist} className='submit mb-3'>{!isselected ? "select-waist" : "add-waist"}</Button>
