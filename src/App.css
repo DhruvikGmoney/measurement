@@ -1,0 +1,33 @@
+body {
+  margin: 0px;
+  padding: 0px;
+
+}
+
+.main-div {
+  padding: 50px 0px;
+}
+
+.main-div .title {
+  text-align: center;
+  color: #fff;
+  
+}
+.main-div .message{
+  text-align: end;
+  padding: 0px 15px;
+
+}
+.main-div .submit {
+  text-align: center;
+  margin: auto;
+  display: block;
+}
+.Measurement{
+  background: #2d3e3f;
+  padding: 50px 0px;
+  border-radius: 15px;
+}
+.Measurement .form-label{
+  color: #fff;
+}
