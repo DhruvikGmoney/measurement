@@ -13,6 +13,7 @@ export default function FormData() {
     const [isselected, setisselected] = useState(false);
     const [isother, setisother] = useState(false);
     let [optionList, setOptionList] = useState([]);
+    let [isdisabled, setisdisabled] = useState(false);
 
 
 
@@ -39,6 +40,7 @@ export default function FormData() {
 
             console.log(response.data.data);
             setisselected(true)
+            setisdisabled(true)
             if (response.data.data[0] !== "other") {
                 setWaist(response.data.data[0])
             } else {
@@ -71,7 +73,6 @@ export default function FormData() {
             };
             axios.request(config)
                 .then((response) => {
-
                     console.log(JSON.stringify(response.data));
                     setMessage(response.data);
                     window.location.reload();
@@ -121,30 +122,30 @@ export default function FormData() {
                             <Col lg={7}>
                                 <Form.Group className="mb-3"    >
                                     <Form.Label>Height</Form.Label>
-                                    <Form.Control required onChange={(e) => setHeight(e.target.value)} type="number" placeholder="enter height" />
+                                    <Form.Control disabled={isdisabled} required onChange={(e) => setHeight(e.target.value)} type="number" placeholder="enter height" />
                                 </Form.Group>
                             </Col>
                             <Col lg={7}>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Weight</Form.Label>
-                                    <Form.Control required onChange={(e) => setWeight(e.target.value)} type="number" placeholder="enter weight" />
+                                    <Form.Control disabled={isdisabled} required onChange={(e) => setWeight(e.target.value)} type="number" placeholder="enter weight" />
                                 </Form.Group>
                             </Col>
                             <Col lg={7}>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Age</Form.Label>
-                                    <Form.Control required onChange={(e) => setAge(e.target.value)} type="number" placeholder="enter age" />
+                                    <Form.Control disabled={isdisabled} required onChange={(e) => setAge(e.target.value)} type="number" placeholder="enter age" />
                                 </Form.Group>
                             </Col>
-                            <Col lg={7} className="mb-3">
+                            {isselected && <Col lg={7} className="mb-3">
                                 <Form.Label>waist</Form.Label>
-                                {isselected && <Form.Select onChange={(e) => selectwaist(e.target.value)}>
+                                <Form.Select onChange={(e) => selectwaist(e.target.value)}>
                                     {optionList?.map((option, index) => (
                                         <option key={index} value={option}>{option}</option>
                                     ))}
-                                </Form.Select>}
-                            </Col>
-                            {isselected && <Col  lg={7}>
+                                </Form.Select>
+                            </Col>}
+                            {isselected && <Col lg={7}>
                                 <Form.Group className="mb-3">
                                     <Form.Control disabled={!isother} onChange={(e) => setWaist(e.target.value)} value={waist} type="text" placeholder="enter waist" />
                                 </Form.Group>
@@ -152,7 +153,7 @@ export default function FormData() {
 
                         </Row>
 
-                        <Button type="submit" disabled={!isValid} onClick={!isselected ? Selectwaist : addwaist} className='submit mb-3'>{!isselected ? "select-waist" : "add-waist"}</Button>
+                        <Button type="submit" disabled={!isValid} onClick={!isselected ? Selectwaist : addwaist} className='submit mb-3'>{!isselected ? "Select Waist" : "Add Waist"}</Button>
 
                     </div>
 
