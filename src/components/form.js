@@ -75,7 +75,9 @@ export default function FormData() {
                 .then((response) => {
                     console.log(JSON.stringify(response.data));
                     setMessage(response.data);
-                    window.location.reload();
+                    setTimeout(() => {
+                        window.location.reload();
+                      }, 3000);
                 })
 
                 .catch((error) => {
